@@ -1,4 +1,4 @@
-# Wallet Generation
+# wallet generation
 
 ![license](https://img.shields.io/github/license/onthebigtree/Wallet-generation)
 ![repo size](https://img.shields.io/github/repo-size/onthebigtree/Wallet-generation)
