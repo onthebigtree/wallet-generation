@@ -24,7 +24,7 @@ def find_wallet_with_prefix(prefix):
 prefix = '0x000000'
 
 # 创建多线程
-thread_count = 8000
+thread_count = 8
 threads = []
 
 for i in range(thread_count):
