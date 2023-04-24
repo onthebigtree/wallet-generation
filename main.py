@@ -20,18 +20,18 @@ def find_wallet_with_prefix(prefix):
         if counter % 1000 == 0:
             print(f"Thread {threading.current_thread().name} tried {counter} wallets.")
 
-# 调用函数
-prefix = '0x00'
+# 前缀要求
+prefix = '0x000000'
 
 # 创建多线程
-thread_count = 3
+thread_count = 8000
 threads = []
 
 for i in range(thread_count):
     t = threading.Thread(target=find_wallet_with_prefix, args=(prefix,), name=f'Thread-{i + 1}')
     threads.append(t)
     t.start()
-
+    print(i,'线程已启动')
 # 等待所有线程完成
 for t in threads:
     t.join()
