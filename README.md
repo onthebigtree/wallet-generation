@@ -1,5 +1,8 @@
 # Wallet Generation
 
+![license](https://img.shields.io/github/license/onthebigtree/Wallet-generation)
+![repo size](https://img.shields.io/github/repo-size/onthebigtree/Wallet-generation)
+
 ## 说明
 
 - 生成想要的钱包前缀可以用 `main.py`；
