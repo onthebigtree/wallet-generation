@@ -1,4 +1,4 @@
-# wallet-generation
+# Wallet Generation
 
 ## 说明
 
