@@ -6,7 +6,8 @@
 ## 说明
 
 - 生成想要的钱包前缀可以用 `main.py`；
-- 想发财用 `check_monoey.py`。
+  - 在代码里面修改自己想要的前后缀 `prefix` `suffix1`
+- 想发财用 `check_monoey.py`
 
 ## 如何使用
 
