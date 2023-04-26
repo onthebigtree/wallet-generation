@@ -1,14 +1,23 @@
 import os
-import threading
+import multiprocessing
 from eth_account import Account
 
-# 创建钱包的函数，返回一个新钱包对象
+prefix1 = '0x0' #你想要的前缀
+suffix1 = 'ac'  #你想要的后缀
+
 def create_wallet():
     wallet = Account.create(os.urandom(32))
     return wallet
 
-# 查找具有特定前缀和后缀的钱包地址的函数
-def find_wallet_with_prefix_and_suffix(prefix, suffix, thread_name):
+''' 
+安全换速度的方法：十六进制值而不是随机生成值可能会稍微提高速度，使用时请注释掉上面的 create_wallet
+def create_wallet():
+    fixed_hex_value = bytes.fromhex("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef")
+    wallet = Account.create(fixed_hex_value)
+    return wallet
+'''
+
+def find_wallet_with_prefix_and_suffix(prefix, suffix):
     counter = 0
     while True:
         counter += 1
@@ -21,22 +30,19 @@ def find_wallet_with_prefix_and_suffix(prefix, suffix, thread_name):
                 print(f"Wallet found: Address: {wallet_address} Private key: {wallet._private_key.hex()}")
 
         if counter % 10000 == 0:
-            print(f"{thread_name} tried {counter} wallets.")
+            print(f"Process {multiprocessing.current_process().name} tried {counter} wallets.")
 
-# 定义目标前缀和后缀、线程数
-prefix = '0x00'
-suffix = '00'
+def worker():
+    find_wallet_with_prefix_and_suffix(prefix1, suffix1)
 
-# 创建多线程
-thread_count = 8
-threads = []
+if __name__ == '__main__':
+    process_count = 8
+    processes = []
 
-for i in range(thread_count):
-    t = threading.Thread(target=find_wallet_with_prefix_and_suffix, args=(prefix, suffix, f'Thread-{i + 1}'), name=f'Thread-{i + 1}')
-    threads.append(t)
-    t.start()
-    print(i, '线程已启动')
+    for _ in range(process_count):
+        p = multiprocessing.Process(target=worker)
+        processes.append(p)
+        p.start()
 
-# 等待所有线程完成
-for t in threads:
-    t.join()
+    for p in processes:
+        p.join()
