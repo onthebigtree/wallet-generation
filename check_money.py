@@ -33,7 +33,7 @@ def find_wallet_with_balance():
             print(f"Thread {threading.current_thread().name} tried {counter} wallets.")
 
 # 创建多线程
-thread_count = 10  
+thread_count = 8
 threads = []
 
 for i in range(thread_count):

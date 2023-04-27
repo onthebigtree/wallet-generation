@@ -2,8 +2,8 @@ import os
 import multiprocessing
 from eth_account import Account
 
-prefix = '0x0' #你想要的前缀
-suffix = 'ac'  #你想要的后缀
+prefix = '0x000' #你想要的前缀
+suffix = '000'  #你想要的后缀
 
 def create_wallet():
     wallet = Account.create(os.urandom(32))
@@ -29,13 +29,15 @@ def find_wallet_with_prefix_and_suffix(prefix1, suffix1):
                 f.write(f"Wallet found: Address: {wallet_address} Private key: {wallet._private_key.hex()}\n")
                 print(f"Wallet found: Address: {wallet_address} Private key: {wallet._private_key.hex()}")
 
-        if counter % 10000 == 0:
-            print(f"Process {multiprocessing.current_process().name} tried {counter} wallets.")
+#        if counter % 10000 == 0:  #进度提醒，会影响速度
+#            print(f"Process {multiprocessing.current_process().name} tried {counter} wallets.")
 
 def worker():
     find_wallet_with_prefix_and_suffix(prefix, suffix)
 
 if __name__ == '__main__':
+    print("程序已开始运行。正在使用多进程查找指定前缀和后缀的以太坊钱包地址。请耐心等待。")
+    
     process_count = 8
     processes = []
 
