@@ -1,5 +1,5 @@
 import os
-import threading
+import multiprocessing
 from eth_account import Account
 from web3 import Web3
 
@@ -36,19 +36,20 @@ def find_wallet_with_balance():
 
         if counter % 1000 == 0:
             print(
-                f"Thread {threading.current_thread().name} tried {counter} wallets.")
+                f"Process {multiprocessing.current_process().name} tried {counter} wallets.")
 
 
-# 创建多线程
-thread_count = 8
-threads = []
+# 自动选择创建多进程
+process_count = multiprocessing.cpu_count()
+processes = []
 
-for i in range(thread_count):
-    t = threading.Thread(target=find_wallet_with_balance,
-                         name=f'Thread-{i + 1}')
-    threads.append(t)
-    t.start()
+if __name__ == "__main__":
+    for i in range(process_count):
+        p = multiprocessing.Process(target=find_wallet_with_balance,
+                                    name=f'Process-{i + 1}')
+        processes.append(p)
+        p.start()
 
-# 等待所有线程完成
-for t in threads:
-    t.join()
+    # 等待所有进程完成
+    for p in processes:
+        p.join()
