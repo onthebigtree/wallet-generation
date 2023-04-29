@@ -37,8 +37,9 @@ def worker():
 
 if __name__ == '__main__':
     print("程序已开始运行。正在使用多进程查找指定前缀和后缀的以太坊钱包地址。请耐心等待。")
-    
-    process_count = 8
+
+#进程数，默认为CPU核心数
+    process_count = multiprocessing.cpu_count()
     processes = []
 
     for _ in range(process_count):
