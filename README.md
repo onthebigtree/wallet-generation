@@ -6,7 +6,6 @@
 ## 说明
 
 - 生成想要的钱包前缀可以用 `address_generation.py`；
-  - 在代码里面修改自己想要的前后缀 `prefix` `suffix1`
 - 想发财用 `find_coin.py`
 - 批量查询钱包余额请用 `check_eth_balances.py`
   - 私钥存放在 `check_balances_keys.txt` ,私钥一行一个
