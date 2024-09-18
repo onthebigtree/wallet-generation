@@ -1,1 +1,1 @@
-pip3 install eth_account web3
+pip install eth_account web3 secrets
